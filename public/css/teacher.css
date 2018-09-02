@@ -1,0 +1,77 @@
+
+body {
+    padding-top: 0;
+    background: rgba(255, 255, 255, 0.5);
+    color: #444;
+}
+
+.teacher-panel {
+    background: #F7F9FA;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding-bottom: 0;
+}
+.teacher-panel .h2 {
+    margin: 0;
+    padding: 10px;
+    width: 300px;
+}
+.teacher-panel .logout-banner {
+    text-align: right;
+    right: 10px;
+    width: 200px;
+    float: right;
+    top: -37px;
+    position: relative;
+}
+.teacher-panel .logout-banner .logout-form {
+    width: 60px;
+    float: right;
+    position: relative;
+}
+.teacher-panel .logout-banner .logout-form button {
+    display: inline-block;
+    border: none;
+    background: #F7F9FA;
+}
+
+.container .list-group {
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+.container .list-group .list-group-item {
+    border-radius: 0;
+    border: none;
+    color: #ECF2F6;
+    background: #2c3e50;
+}
+.container .list-group .list-group-item:hover {
+    background: #2c3e50;
+}
+.container .list-group .list-group-item:active {
+    background: #2c3e50;
+}
+
+.teacher-sidebar {
+    background: #2c3e50;
+}
+
+.teacher-body {
+    margin-top: 10px;
+}
+.teacher-body .panel-heading {
+    padding-top: 0;
+    padding-left: 0;
+    border-bottom: 1px solid #2c3e50;
+}
+.teacher-body .panel-body .form-group {
+    padding-left: 0;
+}
+.teacher-body div .table thead {
+    background: #ddd;
+}
+.teacher-body div .table th {
+    border-bottom-width: 1px;
+}
+
+/*# sourceMappingURL=file:///E:/Projects/schoolcms/public_html/assets/css/student.css.map */
