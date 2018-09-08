@@ -51,5 +51,9 @@ class Path {
     {
         return "/public". static::DS.str_replace(['/',"\\"], static::DS, $file);
     }
-    
+
+    function media($file)
+    {
+        return "/public/media/".$file;
+    }
 }

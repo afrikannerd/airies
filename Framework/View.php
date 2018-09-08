@@ -11,6 +11,9 @@ namespace Framework;
 
 class View
 {
+    /**
+     * @var Application $app
+     */
     private $app;
 
     private $title = TITLE;
@@ -60,4 +63,13 @@ class View
         return $this->payload;
     }
 
+    function __get($name)
+    {
+        return $this->app->$name;
+    }
+
+    public function __toString()
+    {
+        return $this->content();
+    }
 }

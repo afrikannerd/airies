@@ -23,7 +23,7 @@
     <?php include_once $this->path; ?>
 
 </div>
-<footer class="" >
+<footer class="layout-footer" >
     <div class="footer text-center"  >
         Designed and maintained by <a href="https://www.zalegoinstitute.ac.ke/home" target="_blank">Zalego Institute</a>
         <span> Copyright &copy; 2017&nbsp;&nbsp;-&nbsp;&nbsp;<?= date('Y')?></span>

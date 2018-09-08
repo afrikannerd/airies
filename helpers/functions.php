@@ -37,6 +37,12 @@ if(!function_exists("assets"))
     }
 }
 
+function media($file)
+{
+    global $app;
+    return $app->path->media($file);
+}
+
 if(!function_exists("set"))
 {
     /**useful in setting superglobals like _SESSION,_POST etc
@@ -105,4 +111,12 @@ function teacher_sidebar()
         <a href="/teacher/subject" class="list-group-item" >Subjects</a>
     </div>
 NAV;
+}
+
+function dnd($arg)
+{
+    echo '<pre>';
+    var_dump($arg);
+    echo '</pre>';
+    die;
 }

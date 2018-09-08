@@ -14,17 +14,22 @@ class Bootstrap
     /**
      * @var Application $app
      */
-    public $app;
+    private $app;
 
     /**Controller object container
      * @var array $controllers
      */
-    public $controllers = [];
+    private $controllers = [];
 
     /**Model object container
      * @var array $models
      */
-    public $models = [];
+    private $models = [];
+
+    /**Middleware Object container
+     * @var array $middleware
+     */
+    private $middleware = [];
 
     /**
      * Bootstrap constructor.
@@ -46,6 +51,11 @@ class Bootstrap
         $obj = $this->controller($controller);
 
         return call_user_func_array([$obj,$method],$_);
+    }
+
+    public function middleware()
+    {
+
     }
 
     /**

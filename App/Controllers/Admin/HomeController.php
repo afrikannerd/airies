@@ -9,7 +9,9 @@
 namespace App\Controllers\Admin;
 
 
-class HomeController
+use Framework\Controller;
+
+class HomeController extends Controller
 {
     function index()
     {
@@ -18,10 +20,20 @@ class HomeController
 
     function submit()
     {
-        return redirect("/");
+        return redirect("/login/admin");
     }
-    function two()
+    function teacher()
     {
-        return 7777777777777777777777;
+        return redirect('/login/teacher');
+    }
+
+    function student()
+    {
+        return redirect('/login/student');
+    }
+
+    function login()
+    {
+        return $this->view->render('admin/login');
     }
 }

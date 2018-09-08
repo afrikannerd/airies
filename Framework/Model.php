@@ -31,6 +31,10 @@ abstract class Model
 
     }
 
+    function table($table)
+    {
+        $this->table = $table;
+    }
 
     function __call($method, $arguments)
     {

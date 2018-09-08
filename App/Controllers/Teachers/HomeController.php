@@ -24,6 +24,8 @@ class HomeController extends Controller
 
     function exam()
     {
+        $user = $this->app->load->model('Login')->index();
+        $this->app->add('user',$user);
         return $this->view->render("teachers/exam");
     }
 

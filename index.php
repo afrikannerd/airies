@@ -9,11 +9,10 @@ use Framework\{
     Path
 };
 
-
-
 define("ROOT",__DIR__);
 define("TITLE","Sunshine School");
 
 $app = Application::getInstance(new Path(ROOT));
+
 $app->boot();
 

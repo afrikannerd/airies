@@ -1,0 +1,103 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 17, 2018, 11:34:46 PM
+    Author     : afrikannerd <https://github.com/afrikannerd>
+*/
+//backgrounds
+$grey:rgb(143,144,134);
+$text_friendly_green:rgb(35,177,77);
+
+
+
+body{
+    padding-top: 0;
+    background: rgba(255, 255, 255, 0.5);
+    color: #444;
+}
+
+.student-panel{
+    background: #F7F9FA;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding-bottom:0;
+    
+    .h2{
+        margin: 0;
+        padding: 10px;
+        width: 300px;
+    }
+    .logout-banner{
+        text-align: right;
+        right: 10px;
+        width: 200px;
+        float: right;
+        top: -37px;
+        position: relative;
+        
+        .logout-form{
+            width: 60px;
+            float: right;
+            position: relative;
+            
+            button{
+                display: inline-block;
+                border: none;
+                background: #F7F9FA;
+            }
+        }
+        
+    }
+}
+
+.container{
+    
+    .list-group{
+        margin-top: 40px;
+        margin-bottom: 10px;
+        .list-group-item{
+            border-radius: 0;
+            border:none;
+            color:#ECF2F6;
+            background: #2c3e50;
+            &:hover{
+                background: #2c3e50;
+            }
+            &:active{
+                background: #2c3e50;
+            }
+        }
+    }
+}
+
+.student-sidebar{
+    background: #2c3e50;
+    
+}
+.student-body{
+    margin-top: 10px;
+    .panel-heading{
+        padding-top: 0;
+        padding-left: 0;
+        border-bottom: 1px solid rgb(44,62,80);
+    }
+    .panel-body{
+        .form-group{
+            padding-left: 0;
+        }  
+    }
+    
+    div{
+        .table{
+            thead{
+                background: #ddd;
+            }
+            th{
+                border-bottom-width: 1px;
+            }
+        }
+    } 
+}

@@ -26,6 +26,7 @@ class DashboardController extends Controller
 
     function result()
     {
+
         $data['content'] = "This is what I'ma talk about";
         return $this->view->render("students/result",$data);
     }

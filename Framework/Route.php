@@ -59,6 +59,7 @@ class Route
             }
         }
 
+        dnd($this->routes);
         return redirect($this->notFound);
     }
 
