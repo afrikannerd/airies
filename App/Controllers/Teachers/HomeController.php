@@ -19,13 +19,15 @@ class HomeController extends Controller
 
     function index()
     {
-        return $this->view->render("teachers/index");
+        $data['user'] = $this->load->model('Users')->details();
+        
+        return $this->view->render("teachers/index",$data);
     }
 
     function exam()
     {
-        $user = $this->app->load->model('Login')->index();
-        $this->app->add('user',$user);
+        $user = $this->app->load->model('Users')->index();
+        #$this->app->add('user',$user);
         return $this->view->render("teachers/exam");
     }
 

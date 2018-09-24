@@ -15,27 +15,33 @@ abstract class Model
 
 
     protected $table = '';
+    
+    protected $errors = [];
 
     public function __construct(Application $app)
     {
         $this->app = $app;
     }
 
-    function all()
+    public function all()
     {
-
+        return $this->fetchAll($this->table);
     }
 
-    function get($id)
+    public function get($sql,$id)
     {
-
+        return $this->where($sql,$id)->from($this->table)->fetch();
     }
 
-    function table($table)
+    public function setTable($table)
     {
         $this->table = $table;
     }
 
+    public function error()
+    {
+        return $this->errors();
+    }
     function __call($method, $arguments)
     {
         return call_user_func_array([$this->app->db,$method],$arguments);

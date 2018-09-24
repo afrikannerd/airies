@@ -9,10 +9,15 @@
 namespace App\Controllers;
 
 
-class HttpErrorController
+use Framework\Controller;
+
+class HttpErrorController extends Controller
 {
-function index()
+function index($path)
 {
-    return "404 Not Found";
+
+    $data['route'] = $path;
+
+    return $this->view->render('error404',$data);
 }
 }

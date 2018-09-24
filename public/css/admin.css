@@ -1,0 +1,21 @@
+.student-list thead {
+  background: #cccccc; }
+.student-list th, .student-list td {
+  padding: 10px; }
+.student-list .stud-no {
+  width: 40px; }
+.student-list .stud-name {
+  width: 200px; }
+.student-list .stud-admno {
+  width: 80px; }
+.student-list .stud-class {
+  width: 80px; }
+.student-list .stud-action {
+  width: 100px; }
+.student-list .list-group-item {
+  border: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px; }
+
+/*# sourceMappingURL=admin.css.map */

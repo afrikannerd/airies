@@ -13,7 +13,7 @@ class Session
 {
     function init()
     {
-        new Handler();
+        ini_set('session.use_only_cookies', 1);
         if(session_status() !== PHP_SESSION_ACTIVE)
         {
             session_start();
@@ -26,7 +26,7 @@ class Session
 
     function add($key,$value):void
     {
-        set($_SESSION,$key,$value);
+        $_SESSION[$key] = $value;
     }
 
     function get($key)
@@ -54,4 +54,12 @@ class Session
     {
         unset($_SESSION[$key]);
     }
+
+
+    function clear()
+    {
+        unset($_SESSION);
+        session_destroy();
+    }
+
 }

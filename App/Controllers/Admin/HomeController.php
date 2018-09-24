@@ -15,16 +15,20 @@ class HomeController extends Controller
 {
     function index()
     {
-        return "Hello Amolo";
+        return $this->view->render('home/index');
     }
-
+    function admin()
+    {
+        $this->view->setTitle('Admin | Dashboard');
+        return $this->view->render('admin/index');
+    }
     function submit()
     {
         return redirect("/login/admin");
     }
     function teacher()
     {
-        return redirect('/login/teacher');
+        return $this->view->render('admin/teacher');
     }
 
     function student()
@@ -34,6 +38,29 @@ class HomeController extends Controller
 
     function login()
     {
+        /**
+         * @var \App\Models\Users $user
+         */
+        $user = $this->load->model('Users');
+        
+        $path = explode('/',$this->route->getCurrent());
+        $path = end($path);
+        if($user->user())
+        {
+            return redirect('/admin');
+        }else{
+            if( $user->admin() )
+            {
+                
+                $this->session->add('username',$user->user()->email);
+                $this->session->add('name',$user->user()->name);
+                $this->session->add('path',$path);
+                #dnd($this->session->get('username'));
+                return redirect('/admin');
+            }
+        }
+
+
         return $this->view->render('admin/login');
     }
 }

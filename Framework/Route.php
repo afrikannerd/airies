@@ -59,8 +59,8 @@ class Route
             }
         }
 
-        dnd($this->routes);
-        return redirect($this->notFound);
+        #die($this->app->request->url());
+        return ['HttpError','index',[$this->app->request->url()]];
     }
 
     public function error404($path)

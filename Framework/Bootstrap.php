@@ -65,6 +65,7 @@ class Bootstrap
     public function controller($controller):object
     {
         $controller = $this->getControllerName($controller);
+
         if(!$this->controllerObjectExists($controller))
         {
 
@@ -87,6 +88,7 @@ class Bootstrap
             $obj = new $controller($this->app);
 
             $this->controllers[$controller] = $obj;
+            $this->controllers;
 
         }
 

@@ -65,7 +65,7 @@ function student_nav()
         
         <div class=" logout-banner">
             
-            <form class="logout-form " method="post" action="/auth/logout">
+            <form class="logout-form " method="post" action="/logout/student">
                 <button type="submit" name="logout">Logout</button>
             </form>
             
@@ -87,14 +87,16 @@ NAV;
 
 function teacher_nav()
 {
+    global $app;
+    $user = $app->session->get('username');
     echo <<<NAV
     <div class="student-panel">
         <div class="h2">Teacher Dashboard</div>
         
         <div class=" logout-banner">
             
-            <form class="logout-form " method="post" action="/auth/logout">
-                <button type="submit" name="logout">Logout</button>
+            <form class="logout-form " method="post" action="/logout/teacher">
+                <button type="submit" name="logout">Logout<small>($user)</small></button>
             </form>
             
         </div>
@@ -113,10 +115,51 @@ function teacher_sidebar()
 NAV;
 }
 
+function navigation(){
+
+    echo <<<NAV
+<nav class="navbar navbar-default navbar-fixed-top custom-navbar">
+    <div class="container-fluid">
+        <div class="">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                  <input type="text" class="form-control custom-search" placeholder="Search">
+                </div>
+                
+            </form>
+        </div>
+        
+        <div class=" logout-banner">
+            
+            <form class="logout-form " method="post" action="/logout/admin">
+                <button type="submit" name="logout">Logout</button>
+            </form>
+            
+        </div>
+    </div>
+    
+</nav>
+NAV;
+}
+
+function sidebar(){
+    echo <<<EOT
+<div class=" col-md-2 custom-sidebar">
+    <ul class="list-group">
+        <a href="/admin" class="list-group-item">Home</a>
+        <a href="/admin/students" class="list-group-item">Students</a>
+        <a href="/admin/teachers" class="list-group-item">Teachers</a>
+        <a href="/admin/fees" class="list-group-item">Fees</a>
+        <a href="/admin/exams" class="list-group-item">Exams</a>
+    </ul>
+</div>
+EOT;
+}
+
 function dnd($arg)
 {
     echo '<pre>';
     var_dump($arg);
     echo '</pre>';
-    die;
+    die();
 }

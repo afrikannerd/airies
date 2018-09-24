@@ -16,18 +16,10 @@
 
 <link href="<?=assets('css/bootstrap.min.css');?>" rel="stylesheet" type="text/css"/>
 <link href="<?=assets('css/app.css');?>" rel="stylesheet" type="text/css"/>
-<link href="<?=assets('css/admin.css');?>" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
 <div class="container-fluid main">
-    <?php
-    if($this->app->session->exists('username'))
-    {
-        navigation();
-        sidebar();
-    }
-
-    ?>
     <?php include_once $this->path; ?>
 
 </div>

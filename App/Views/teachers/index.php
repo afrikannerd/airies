@@ -12,20 +12,17 @@
                     <tbody>
                     <tr>
                         <td>Name</td>
-                        <td>Kris Kara</td>
+                        <td><?=$user->name?></td>
                     </tr>
                     <tr>
-                        <td>Username</td>
-                        <td>Kris</td>
+                        <td>TSC No</td>
+                        <td><?=$user->regid?></td>
                     </tr>
                     <tr>
-                        <td>Tsc No</td>
-                        <td>333</td>
+                        <td>Contact</td>
+                        <td><?=$user->contact?></td>
                     </tr>
-                    <tr>
-                        <td>Gender</td>
-                        <td>Male</td>
-                    </tr>
+                    
                     </tbody>
                 </table>
             </div>

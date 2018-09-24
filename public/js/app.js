@@ -7,6 +7,7 @@
  */
 $(document).ready(function(){
 
+    /*
     $('#addnew').on('click',function(){
         
         var cls = $('#class').val();
@@ -18,6 +19,7 @@ $(document).ready(function(){
 
         });
     });
+
 
     $('.view_student').on('click',function (){
         $('.add_student_form').empty();
@@ -40,7 +42,7 @@ $(document).ready(function(){
 
     });
 
-
+*/
 });
 
 function isNumeric(evt) {

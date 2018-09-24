@@ -1,7 +1,6 @@
 
 <div class="container">
-    <?php teacher_nav();?>
-    <?php teacher_sidebar();?>
+
     <div class="panel col-md-offset-2 teacher-body">
         <div class="panel-heading">Exam Marks</div>
         <div class="panel-body">

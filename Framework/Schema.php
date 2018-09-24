@@ -125,8 +125,9 @@ class Schema
      */
     private $table = "";
 
+    private $query = null;
 
-
+    private $success = false;
 
     /**
      * Schema constructor.
@@ -134,6 +135,7 @@ class Schema
      */
     public function __construct(Application $app)
     {
+
         $this->app = $app;
         $this->pdo();
     }
@@ -164,30 +166,38 @@ class Schema
      */
     function query($sql)
     {
-        #die($sql);
-        if($query = $this->pdo->prepare($sql))
+
+        $this->success = false;
+        if($this->query = $this->pdo->prepare($sql))
         {
+
+
             if($this->binding)
             {
                 foreach ($this->binding as $key => $val)
                 {
+                    echo $key." ".$val,"<br>";
 
-                    $query->bindParam(++$key,$val);
+                    $this->query->bindValue(++$key,$val);
                 }
-            }
 
-            if($query->execute())
+            }
+            print($this->query->queryString);
+
+            if($this->query->execute())
             {
-                return $query->fetch(\PDO::FETCH_OBJ);
-            }
+                $this->numrows = $this->query->rowCount();
+                $this->success = true;
 
-            $this->errors = $query->errorInfo();
+            }
+            #dnd([$this->binding,$this->query->fetchAll(\PDO::FETCH_OBJ)]);
+            $this->errors = $this->query->errorInfo();
 
         }else{
-            $this->errors = $query->errorInfo();
+            $this->errors = $this->query->errorInfo();
         }
 
-        return $this->errors;
+        return $this;
 
     }
     function select()
@@ -195,25 +205,29 @@ class Schema
         $this->select = array_merge($this->select,func_get_args());
         return $this;
     }
-    function update(string $table = null):bool
+    function update(string $table = null)
     {
         $this->table($table);
 
         $sql = "UPDATE ".$this->table." SET ".$this->prepareUpdate();
-        return $this->query($sql);
+        $result = $this->query($sql);
+        $this->_reset();
+        return $result;
     }
 
     /**Insert a record into the database
      * @param string|null $table
      * @return mixed
      */
-    function insert(string $table = null):bool
+    function insert(string $table = null)
     {
         $this->table($table);
         $sql = "INSERT INTO {$this->table} ";
         $sql .= $this->prepareInsert();
-
-        return $this->query($sql);
+        #dnd($sql);
+        $result = $this->query($sql);
+        $this->_reset();
+        return $result;
     }
 
     /**Delete a database record
@@ -221,13 +235,15 @@ class Schema
      * @param null $args
      * @return bool
      */
-    function delete($sql,$args = null):bool
+    function delete($sql,$args = null)
     {
 
         $sql = "DELETE FROM {$this->table} WHERE".$sql;
         $this->bind($args);
 
-        $this->query($sql);
+        $result = $this->query($sql);
+        $this->_reset();
+        return $result;
 
     }
     function union()
@@ -358,7 +374,7 @@ class Schema
 
         if($this->where)
         {
-            $sql .= " WHERE ".implode("  ",$this->where);
+            $sql .= " WHERE ".implode("  AND",$this->where);
         }
 
         if($this->having)
@@ -375,7 +391,7 @@ class Schema
         {
             $sql .= " ORDER BY ".implode("  ",$this->orderBy);
         }
-        
+        #dnd($sql);
         return $sql;
     }
 
@@ -386,9 +402,24 @@ class Schema
     function fetch($table = null)
     {
         $this->table($table);
-        return $this->query($this->prepareSelect());
+        $this->query($this->prepareSelect());
+        $result = $this->query->fetch(\PDO::FETCH_OBJ);
+        $this->_reset();
+        return $result;
     }
 
+    /**
+     * @param null $table
+     * @return mixed
+     */
+    function fetchAll($table = null)
+    {
+        $this->table($table);
+        $this->query($this->prepareSelect());
+        $result = $this->query->fetchAll(\PDO::FETCH_OBJ);
+        $this->_reset();
+        return $result;
+    }
     /**
      * @param string $key
      * @param $value
@@ -406,7 +437,7 @@ class Schema
      */
     function prepareInsert()
     {
-        $sql = '('.join(',',array_keys($this->data)).') VALUES (';
+        $sql = '('.join(',',array_values($this->data)).') VALUES (';
 
         for ($i = 0; $i < count($this->data);$i++)
         {
@@ -450,4 +481,35 @@ class Schema
             $this->table = $table;
         }
     }
+    
+    public function errors() {
+        return $this->errors;
+    }
+
+    function lastID()
+    {
+        return $this->lastID;
+    }
+    public function success()
+    {
+        return $this->success;
+    }
+    
+    public function _reset()
+    {
+        $this->data = [];
+        $this->query = null;
+        $this->binding = [];
+        $this->errors = [];
+        $this->having = [];
+        $this->join = [];
+        $this->groupBy = [];
+        $this->orderBy = [];
+        $this->select = [];
+        $this->union = [];
+        $this->where = [];
+
+    }
+
+
 }

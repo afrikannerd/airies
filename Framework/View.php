@@ -42,19 +42,48 @@ class View
 
     private function viewPath($view):void
     {
-        list($dir,$file) = explode("/",$view,2);
-        $view = "App\\Views\\".$view;
+        if(stripos($view,'/') === false)
+        {
+            $dir = $view;
+
+        }
+        else{
+            list($dir,$file) = explode("/",$view,2);
+
+        }
+
+        $view = "\App\\Views\\".$view;
+
         $this->path = $this->app->path->to($view);
-        $this->layout = $this->app->path->to("App\\Views\\{$dir}\\layout");
+
+        if(is_dir("./App/Views/{$dir}"))
+        {
+
+            $this->layout = $this->app->path->to("App\\Views\\{$dir}\\layout");
+
+        }
+
+
+
     }
 
     private function content()
     {
+
         if(is_null($this->payload))
         {
             ob_start();
             extract($this->data);
-            include_once $this->layout;
+
+            if(!is_null($this->layout))
+            {
+                include_once $this->layout;
+            }
+            else
+            {
+                include_once $this->path;
+            }
+
 
 
             $this->payload = ob_get_clean();
