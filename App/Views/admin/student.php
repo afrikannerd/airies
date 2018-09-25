@@ -98,19 +98,8 @@
 
             </div>
             <div id="info">
-                <?php
-                if($this->app->session->exists('success') || $this->app->session->exists('error'))
-                {
-                    ?>
-                    <div class="alert <?php echo $this->app->session->exists('success')?"alert-success alert-dismissable":"alert-danger alert-dismissable";?>">
-                        <?php
-                        echo $this->app->session->exists('success')?$this->app->session->pop('success'):var_dump($this->app->session->pop('error'));
-                        ?>
-                    </div>
-                <?php
-                }
-                ?>
-                <div class="al"
+                <?=sess_message();?>
+
             </div>
         </div>
 

@@ -374,7 +374,7 @@ class Schema
 
         if($this->where)
         {
-            $sql .= " WHERE ".implode("  AND",$this->where);
+            $sql .= " WHERE ".implode(" ",$this->where);
         }
 
         if($this->having)

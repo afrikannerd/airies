@@ -10,6 +10,7 @@
                 </div>
             </div>
         </div>
+        <?= sess_message()?>
     <table class="  student-list">
         <thead>
             <th class="stud-no">#</th>

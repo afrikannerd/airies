@@ -41,7 +41,7 @@ class Students extends Model
             $this->session->add('success',"Record {$this->lastID()} inserted successfully");
         }else
         {
-            $this->session->add('error',$this->errors);
+            $this->session->add('error',$this->errors());
         }
 
 
@@ -55,5 +55,22 @@ class Students extends Model
                     ->from('users as u,classes as c')
                     ->join('INNER JOIN students as s ON c.id=s.class WHERE u.regid=s.admno')
                     ->fetchAll();
+    }
+
+    public function studentDetails()
+    {
+        #SELECT u.*,s.*,c.classname from users as u,classes as c INNER JOIN students as s ON c.id=s.class WHERE u.regid=s.admno AND u.regid=466
+        #SELECT u.* , s.* , c.classname,(SELECT name FROM counties AS c INNER JOIN students AS s ON c.id=s.county_id WHERE s.admno=u.regid) as
+         #county FROM users as u,classes as c INNER JOIN students as s ON c.id=s.class WHERE u.regid=s.admno AND u.regid=466
+
+
+        ;
+        /*return $this->select('u.*','s.*','c.classname')
+                    ->from('users as u,classes as c')
+                    ->join('INNER JOIN students as s ON c.id=s.class')
+                    ->where('u.regid=s.admno AND u.regid=?',$id[0])
+                    ->fetch();*/
+
+
     }
 }

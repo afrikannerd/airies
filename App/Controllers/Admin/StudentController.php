@@ -54,11 +54,21 @@ class StudentController extends Controller
 
     function profile()
     {
-        $id = explode('/',$this->request->url());
-        $id = end($id);
+
+        /**
+         * @var \App\Models\Students $model
+         */
         $model = $this->load->model('Students');
-        $model->setTable('users');
-        dnd($model->get('regid=?',$id));
+        preg_match('#(\d+)$#',$this->request->url(),$id);
+        $model->setTable('studentdetails');
+        $data['user'] = $model->get('regid=?',$id[0]);
+        if(!($data['user'] instanceof \stdClass))
+        {
+            $this->session->add('error',"no student exists with admission {$id[0]}");
+            return redirect("/admin/viewstudent");
+        }
+
+        return $this->view->render('admin/profile',$data);
     }
 
 }

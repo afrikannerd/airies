@@ -57,6 +57,28 @@ if(!function_exists("set"))
     }
 }
 
+if(!function_exists('sess_message'))
+{
+    function sess_message()
+    {
+        global $app;
+        $message = "";
+        $message_type = $app->session->exists('success')?$app->session->pop('success'):var_dump($app->session->pop('error'));
+        $alert_type = $app->session->exists('success')?"alert-success alert-dismissable":"alert-danger alert-dismissable";
+        if($app->session->exists('success') || $app->session->exists('error'))
+        {
+
+           $message .=" <div class=\"alert {$alert_type} \">";
+
+            $message .= $message_type;
+
+            $message .= "</div>";
+
+        }
+        return $message;
+
+    }
+}
 function student_nav()
 {
     echo <<<NAV

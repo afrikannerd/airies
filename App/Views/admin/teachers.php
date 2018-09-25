@@ -10,8 +10,8 @@
                 </div>
             </div>
         </div>    
-        <div class="panel_content">
-
+        <div class="panel_content" contenteditable="true">
+            Here I am
         </div>
         
     </section>
