@@ -23,7 +23,7 @@ $settings = array(
 $graph = new SVGGraph(400, 200,$settings);
 $graph->colours = array('white');
 $graph->Values(["F1T1"=>67.78,"F1T2"=>65.50,"F1T3"=>62.63,
-    "F2T1"=>null,"F12T2"=>null,"F3T1"=>null,"F3T2"=>null,"F3T3"=>null,
+    "F2T1"=>$average,"F12T2"=>null,"F3T1"=>null,"F3T2"=>null,"F3T3"=>null,
     "F4T1"=>null,"F4T2"=>null
 ]);
 
@@ -45,8 +45,33 @@ ob_start();
 <html>
 
 <head>
-    <title>Report</title>
-    <meta http-equiv="Content-Type" content="svg/xml" />
+    <title><?=$result->name?>'s Report</title>
+
+    <script src="<?=assets('js/jquery-3.3.1.min.js')?>"></script>
+    <script>
+        $(document).ready(function () {
+
+            var tot_average = 0;
+            var possible = 0;
+            var points = 0;
+            var count = 0;
+            $('.mean').each(function () {
+                tot_average += Number($(this).text());
+                possible +=100;
+            });
+            $('.points').each(function () {
+                points += Number($(this).text());
+                count += 1;
+            });
+            var mean_point = points/count;
+            $('.tot_avg').html(tot_average);
+            $('.tot_pos').html(possible);
+            $('.mean_point').html(mean_point.toFixed(2));
+
+
+        });
+
+    </script>
 
 <style>
 html{
@@ -110,7 +135,7 @@ margin: 20px;
             <div class="email">academy@sunshine.ac.ke</div>
         </div>
         <div class="student-photo">
-            <img src="public/media/testphoto.jpg">
+<!--            <img src="public/media/testphoto.jpg">-->
         </div>
     </div>
     <div class="divider"></div>
@@ -129,8 +154,8 @@ margin: 20px;
                 <tr>
                     <td><span style="font-weight: bold;">FORM POSITION:</span> <u><b>23</b></u> OUT OF <u><b>159</b></u></td>
                     <td><span style="font-weight: bold;">CLASS POSITION:</span> <u><b>7</b></u> OUT OF <u><b>53</b></u></td>
-                    <td><span style="font-weight: bold;">GRADE:</span> B</td>
-                    <td><span style="font-weight: bold;">MEAN:</span> 62.63</td>
+                    <td><span style="font-weight: bold;">GRADE:</span> <?php echo $grade?></td>
+                    <td><span style="font-weight: bold;">MEAN:</span> <?php echo $average?></td>
                 </tr>
             </table>
         </div>
@@ -156,134 +181,134 @@ margin: 20px;
                     <td>Maths</td>
                     <td><?php echo $result->maths?></td>
                     <td><?php echo $result2->maths?></td>
-                    <td><?php echo results($result->maths,$result2->maths)->mean()?></td>
+                    <td class="mean"><?php echo results($result->maths,$result2->maths)->mean()?></td>
                     <td><?php echo results($result->maths,$result2->maths)->grade()?></td>
-                    <td><?php echo results($result->maths,$result2->maths)->point()?></td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td class="points"><?php echo results($result->maths,$result2->maths)->point()?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>English</td>
                     <td><?php echo $result->english?></td>
                     <td><?php echo $result2->english?></td>
-                    <td><?php echo results($result->english,$result2->english)->mean()?></td>
+                    <td class="mean"><?php echo results($result->english,$result2->english)->mean()?></td>
                     <td><?php echo results($result->english,$result2->english)->grade()?></td>
-                    <td><?php echo results($result->english,$result2->english)->point()?></td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td class="points"><?php echo results($result->english,$result2->english)->point()?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>Kiswahili</td>
                     <td><?php echo $result->kiswahili?></td>
                     <td><?php echo $result2->kiswahili?></td>
-                    <td><?php echo results($result->kiswahili,$result2->kiswahili)->mean()?></td>
+                    <td class="mean"><?php echo results($result->kiswahili,$result2->kiswahili)->mean()?></td>
                     <td><?php echo results($result->kiswahili,$result2->kiswahili)->grade()?></td>
-                    <td><?php echo results($result->kiswahili,$result2->kiswahili)->point()?></td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td class="points"><?php echo results($result->kiswahili,$result2->kiswahili)->point()?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>Biology</td>
                     <td><?php echo $result->biology?></td>
                     <td><?php echo $result2->biology?></td>
-                    <td><?php echo results($result->biology,$result2->biology)->mean()?></td>
+                    <td class="mean"><?php echo results($result->biology,$result2->biology)->mean()?></td>
                     <td><?php echo results($result->biology,$result2->biology)->grade()?></td>
-                    <td><?php echo results($result->biology,$result2->biology)->point()?></td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td class="points"><?php echo results($result->biology,$result2->biology)->point()?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>Physics</td>
                     <td><?php echo $result->physics?></td>
                     <td><?php echo $result2->physics?></td>
-                    <td><?php echo results($result->physics,$result2->physics)->mean()?></td>
+                    <td class="mean"><?php echo results($result->physics,$result2->physics)->mean()?></td>
                     <td><?php echo results($result->physics,$result2->physics)->grade()?></td>
-                    <td><?php echo results($result->physics,$result2->physics)->point()?></td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td class="points"><?php echo results($result->physics,$result2->physics)->point()?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>Chemistry</td>
                     <td><?php echo $result->chemistry?></td>
                     <td><?php echo $result2->chemistry?></td>
-                    <td><?php echo results($result->chemistry,$result2->chemistry)->mean()?></td>
+                    <td class="mean"><?php echo results($result->chemistry,$result2->chemistry)->mean()?></td>
                     <td><?php echo results($result->chemistry,$result2->chemistry)->grade()?></td>
-                    <td><?php echo results($result->chemistry,$result2->chemistry)->point()?></td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td class="points"><?php echo results($result->chemistry,$result2->chemistry)->point()?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>History & Gov't</td>
                     <td><?php echo $result->history?></td>
                     <td><?php echo $result2->history?></td>
-                    <td><?php echo results($result->history,$result2->history)->mean()?></td>
+                    <td class="mean"><?php echo results($result->history,$result2->history)->mean()?></td>
                     <td><?php echo results($result->history,$result2->history)->grade()?></td>
-                    <td><?php echo results($result->history,$result2->history)->point()?></td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td class="points"><?php echo results($result->history,$result2->history)->point()?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>Geography</td>
                     <td><?php echo $result->geography?></td>
                     <td><?php echo $result2->geography?></td>
-                    <td><?php echo results($result->geography,$result2->geography)->mean()?></td>
+                    <td class="mean"><?php echo results($result->geography,$result2->geography)->mean()?></td>
                     <td><?php echo results($result->geography,$result2->geography)->grade()?></td>
-                    <td><?php echo results($result->geography,$result2->geography)->point()?></td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td class="points"><?php echo results($result->geography,$result2->geography)->point()?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>Religion</td>
                     <td><?php echo $result->religion?></td>
                     <td><?php echo $result2->religion?></td>
-                    <td><?php echo results($result->religion,$result2->religion)->mean()?></td>
+                    <td class="mean"><?php echo results($result->religion,$result2->religion)->mean()?></td>
                     <td><?php echo results($result->religion,$result2->religion)->grade()?></td>
-                    <td><?php echo results($result->religion,$result2->religion)->point()?></td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td class="points"><?php echo results($result->religion,$result2->religion)->point()?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>Computer Studies</td>
                     <td><?php echo $result->computer_studies?></td>
                     <td><?php echo $result2->computer_studies?></td>
-                    <td><?php echo results($result->computer_studies,$result2->computer_studies)->mean()?></td>
+                    <td class="mean"><?php echo results($result->computer_studies,$result2->computer_studies)->mean()?></td>
                     <td><?php echo results($result->computer_studies,$result2->computer_studies)->grade()?></td>
-                    <td><?php echo results($result->computer_studies,$result2->computer_studies)->point()?></td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td class="points"><?php echo results($result->computer_studies,$result2->computer_studies)->point()?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>Business Studies</td>
                     <td><?php echo $result->business_studies?></td>
                     <td><?php echo $result2->business_studies?></td>
-                    <td><?php echo results($result->business_studies,$result2->business_studies)->mean()?></td>
+                    <td class="mean"><?php echo results($result->business_studies,$result2->business_studies)->mean()?></td>
                     <td><?php echo results($result->business_studies,$result2->business_studies)->grade()?></td>
-                    <td><?php echo results($result->business_studies,$result2->business_studies)->point()?></td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td class="points"><?php echo results($result->business_studies,$result2->business_studies)->point()?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="3"></td>
-                    <td class="total">689</td>
-                    <td>B</td>
-                    <td>8.9</td>
+                    <td class="total tot_avg"><?=$totalmarks?></td>
+                    <td><?php echo $grade?></td>
+                    <td class="mean_point"><?php echo $points?></td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
-                    <td class="total">1100</td>
+                    <td class="total tot_pos">1100</td>
                     <td>A</td>
                     <td>12</td>
                 </tr>
@@ -356,8 +381,8 @@ margin: 20px;
                                 <td>1</td>
                                 <td>-</td>
                                 <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
+                                <td><?=$average?></td>
+                                <td><?=$points?></td>
                             </tr>
                             <tr>
                                 <td>2</td>
@@ -492,6 +517,7 @@ margin: 20px;
         </div>
     </div>
 </div>
+
 </body>
 </html>
 <?php

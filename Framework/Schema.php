@@ -150,7 +150,7 @@ class Schema
         {
 
             try{
-                $this->pdo = new \PDO("mysql:host=localhost;dbname=schoolcms;","root","banter");
+                $this->pdo = new \PDO("mysql:host=".HOST.";dbname=".DB,USER,PASSWORD);
             }
             catch (\PDOException $ex)
             {

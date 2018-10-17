@@ -239,7 +239,7 @@ if(!function_exists('results'))
 
             public function calcmean()
             {
-                $this->mean = ceil(($this->mid + $this->end)/2);
+                $this->mean = ($this->mid + $this->end)/2;
 
             }
 
@@ -325,6 +325,60 @@ if(!function_exists('results'))
     }
 }
 
+if(!function_exists('grading'))
+{
+    function grading($average)
+    {
+        if($average < 30)
+        {
+            return $grade = 'E'; 
+            
+        }elseif ($average >= 30 && $average < 35)
+        {
+            return $grade = 'D-';
+            
+        }elseif ($average >= 35 && $average < 40)
+        {
+            return $grade = 'D';
+            
+        }elseif ($average >= 40 && $average < 45)
+        {
+            return $grade = 'D+';
+            
+        }elseif ($average >= 45 && $average < 50)
+        {
+            return $grade = 'C-';
+            
+        }elseif ($average >= 50 && $average < 55)
+        {
+            return $grade = 'C';
+            
+        }elseif ($average >= 55 && $average < 60)
+        {
+            return $grade = 'C+';
+            
+        }elseif ($average >= 60 && $average < 65)
+        {
+            return $grade = 'B-';
+            
+        }elseif ($average >= 65 && $average < 70)
+        {
+            return $grade = 'B';
+            
+        }elseif ($average >= 70 && $average < 75)
+        {
+            return $grade = 'B+';
+            
+        }elseif ($average >= 75 && $average < 80)
+        {
+            return $grade = 'A-';
+
+        }else{
+            return $grade = 'A';
+            
+        }
+    }
+}
 
 
 
