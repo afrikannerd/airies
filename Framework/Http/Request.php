@@ -8,9 +8,7 @@
 
 namespace Framework\Http;
 
-
-
-
+if(!defined('ROOT'))exit("Get out!");
 use Framework\Application;
 
 class Request

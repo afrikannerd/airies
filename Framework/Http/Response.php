@@ -7,8 +7,7 @@
  */
 
 namespace Framework\Http;
-
-
+if(!defined('ROOT'))exit("Get out!");
 use Framework\Application;
 
 class Response
@@ -29,25 +28,33 @@ class Response
 
     function respond()
     {
+
         $this->sendHeaders();
         $this->sendResponse();
+
     }
 
     function setHeader($headerstring)
     {
+
         $this->headers[] = $headerstring;
+
     }
 
     function sendHeaders()
     {
+
         foreach ($this->headers as $header)
         {
+
             header($header);
+
         }
+
     }
 
     private function sendResponse()
     {
-        print $this->response;
+        echo $this->response;
     }
 }

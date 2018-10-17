@@ -15,6 +15,8 @@ class HomeController extends Controller
 {
     function index()
     {
+
+        #$this->path->load('pdf');
         return $this->view->render('home/index');
     }
     function admin()

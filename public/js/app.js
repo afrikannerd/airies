@@ -43,6 +43,14 @@ $(document).ready(function(){
     });
 
 */
+    $('.remove_student').on('click',function () {
+        $.post("/admin/delete/student",{},function () {
+            
+        });
+    });
+
+
+
 });
 
 function isNumeric(evt) {

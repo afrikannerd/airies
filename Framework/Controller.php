@@ -8,18 +8,20 @@
 
 namespace Framework;
 
-
+if(!defined('ROOT'))exit("Get out!");
 abstract class Controller
 {
     protected $app;
 
     protected $errors = [];
     protected $table = '';
+    protected $paginate;
 
     public function __construct(Application $app)
     {
         $this->app = $app;
-        echo $this->table;
+
+        #$this->paginate = new Pagination();
     }
 
     function __get($name)

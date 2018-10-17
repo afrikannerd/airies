@@ -8,7 +8,7 @@
 
 namespace Framework;
 
-
+if(!defined('ROOT'))exit("Get out!");
 class View
 {
     /**
@@ -74,6 +74,7 @@ class View
         {
             ob_start();
             extract($this->data);
+
 
             if(!is_null($this->layout))
             {

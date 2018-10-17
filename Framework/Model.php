@@ -8,7 +8,7 @@
 
 namespace Framework;
 
-
+if(!defined('ROOT'))exit("Get out!");
 abstract class Model
 {
     protected $app;
@@ -31,6 +31,11 @@ abstract class Model
     public function get($sql,$id)
     {
         return $this->where($sql,$id)->from($this->table)->fetch();
+    }
+
+    public function delete($sql,$id)
+    {
+        return $this->from($this->table)->delete($sql,$id);
     }
 
     public function setTable($table)

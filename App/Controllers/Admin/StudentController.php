@@ -16,11 +16,7 @@ class StudentController extends Controller
     function index()
     {
         $this->view->setTitle('Admin | Students');
-        /**
-         * @var \App\Models\Students $student
-         */
         $student = $this->load->model('Students');
-        
         $student->setTable('classes');
         $data['classes'] = $student->all();
         $student->setTable('counties');
@@ -32,32 +28,37 @@ class StudentController extends Controller
     {
 
         $model = $this->load->model('Students');
-
         $model->addStudent();
         return redirect('/admin/students');
     }
 
     function view()
     {
-        /**
-         * @var \App\Models\Students $model
-         */
+
         $model = $this->load->model('Students');
         $data['students'] = $model->getStudents();
+        $model->setTable('classes');
+        $data['classes'] = $model->all();
         return $this->view->render('admin/viewstudent',$data);
     }
 
     function remove()
     {
-        return $this->view->render('admin/removestudent');
+        $referer = $this->session->get("referer");
+        preg_match('#(\d+)#',$this->request->url(),$id);
+        $model = $this->load->model('Students');
+        $model->setTable('students');
+        $model->delete('admno=?',$id[0]);
+        $model->setTable('users');
+        $model->delete('regid=?',$id[0]);
+        return redirect($referer);
+
     }
 
     function profile()
     {
 
-        /**
-         * @var \App\Models\Students $model
-         */
+
         $model = $this->load->model('Students');
         preg_match('#(\d+)$#',$this->request->url(),$id);
         $model->setTable('studentdetails');
@@ -71,4 +72,31 @@ class StudentController extends Controller
         return $this->view->render('admin/profile',$data);
     }
 
+    function edit()
+    {
+        preg_match('#(\d+)#',$this->request->url(),$id);
+
+        $model = $this->load->model('Students');
+        $model->setTable('studentdetails');
+        $data['old'] = $model->get("regid=?",$id[0]);
+        $model->setTable('classes');
+        $data['classes'] = $model->all();
+        $model->setTable('counties');
+        $data['counties'] = $model->all();
+        return $this->view->render('admin/edit',$data);
+    }
+
+    function update()
+    {
+        $referer = $this->session->get("referer");
+        $ref = ADMIN_REFERER;
+        if(preg_grep("#^$ref#",[$referer]))
+        {
+            $model = $this->load->model("Students");
+            $model->update();
+            return redirect($referer);
+        }
+        return redirect($referer);
+
+    }
 }

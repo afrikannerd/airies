@@ -54,23 +54,29 @@ class Students extends Model
         return $this->select('u.name','u.regid','c.classname')
                     ->from('users as u,classes as c')
                     ->join('INNER JOIN students as s ON c.id=s.class WHERE u.regid=s.admno')
+                    ->limit(20)
                     ->fetchAll();
     }
 
-    public function studentDetails()
+    public function update()
     {
-        #SELECT u.*,s.*,c.classname from users as u,classes as c INNER JOIN students as s ON c.id=s.class WHERE u.regid=s.admno AND u.regid=466
-        #SELECT u.* , s.* , c.classname,(SELECT name FROM counties AS c INNER JOIN students AS s ON c.id=s.county_id WHERE s.admno=u.regid) as
-         #county FROM users as u,classes as c INNER JOIN students as s ON c.id=s.class WHERE u.regid=s.admno AND u.regid=466
+        $this->data('name',$this->request->post('name'))
+            ->data('password',password_hash($this->request->post('pwd'),\PASSWORD_DEFAULT))
+            ->data('permission','1')
+            ->where("regid=?",$this->request->post('admno'))
+            ->update('users');
 
 
-        ;
-        /*return $this->select('u.*','s.*','c.classname')
-                    ->from('users as u,classes as c')
-                    ->join('INNER JOIN students as s ON c.id=s.class')
-                    ->where('u.regid=s.admno AND u.regid=?',$id[0])
-                    ->fetch();*/
 
-
+        $this->data('transfer',(int)$this->request->post('transfer'))
+            ->data('fromm',$this->request->post('prev_school'))
+            ->data('class',$this->request->post('class'))
+            ->data('county_id',$this->request->post('county'))
+            ->data('dob',$this->request->post('dob'))
+            ->data('address',$this->request->post('box'))
+            ->data('guardian',$this->view->request->post('guardian'))
+            ->data('guardiancontact',$this->request->post('guard-contact'))
+            ->where("admno=?",$this->request->post('admno'))
+            ->update('students');
     }
 }

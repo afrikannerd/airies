@@ -18,11 +18,11 @@
                     <div class="panel-body">
                         <div class="form-group col-md-3">
                             <label for="name">Name</label>
-                            <input type="text" name="name" id="name" class="form-control" required="required" />
+                            <input type="text" name="name" id="name" class="form-control" value="<?=isset($old)?$old->name:'';?>" required="required" />
                         </div>
                         <div class="form-group col-md-3">
                             <label for="admno">Admission Number</label>
-                            <input type="number" name="admno" id="admno" class="form-control" required/>
+                            <input type="number" name="admno" id="admno" class="form-control" value="<?=isset($old)?$old->regid:'';?>" required/>
                         </div>
                         <?php if(!empty($classes))
                         {?>
@@ -31,7 +31,16 @@
                                 <select name="class" id="class" class="class form-control">
                                     <?php
                                     while ($class = array_shift($classes))
-                                    {?>
+                                    {
+                                        if(isset($old))
+                                        {
+                                            if($class->classname === $old->classname)
+                                            {
+                                                echo "<option value=\"{$class->id}\" selected>{$class->classname}</option>";
+                                                continue;
+                                            }
+                                        }
+                                        ?>
 
                                         <option value="<?= $class->id; ?>"><?= $class->classname; ?></option>
 
@@ -41,7 +50,7 @@
                         <?php }?>
                         <div class="form-group col-md-3">
                             <label>Date of Birth</label>
-                            <input type="date" name="dob"  class="form-control" required/>
+                            <input type="date" name="dob"  class="form-control" value="<?=isset($old)?$old->dob:'';?>" required/>
                         </div>
                         <?php if(!empty($counties))
                         {?>
@@ -50,10 +59,18 @@
                                 <select name="county" id="class" class="class form-control">
                                     <?php
                                     while ($county = array_shift($counties))
-                                    {?>
+                                    {
+                                        if(isset($old))
+                                        {
+                                            if($county->name === $old->county)
+                                            {
+                                                echo "<option value=\"{$county->id}\" selected>{$county->name}</option>";
+                                                continue;
+                                            }
+                                        }
+                                        ?>
 
                                         <option value="<?= $county->id; ?>"><?= $county->name; ?></option>
-
                                     <?php }?>
                                 </select>
                             </div>
@@ -67,19 +84,19 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="prev_school">Previous School</label>
-                            <input type="text" name="prev_school" id="prev_school" class="form-control" required/>
+                            <input type="text" name="prev_school" id="prev_school" class="form-control" value="<?=isset($old)?$old->fromm:'';?>" required/>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="postal-box">Home Address</label>
-                            <input type="text" name="box" id="postal-box" class="form-control" required/>
+                            <input type="text" name="box" id="postal-box" class="form-control" value="<?=isset($old)?$old->address:'';?>" required/>
                         </div>
                         <div class="form-group col-md-3">
                             <label>Primary Guardian</label>
-                            <input type="text" name="guardian"  class="form-control" required/>
+                            <input type="text" name="guardian"  class="form-control" value="<?=isset($old)?$old->guardian:'';?>" required/>
                         </div>
                         <div class="form-group col-md-3">
                             <label>Contact</label>
-                            <input type="text" name="guard-contact"  class="form-control" required/>
+                            <input type="text" name="guard-contact"  class="form-control" value="<?=isset($old)?$old->guardiancontact:'';?>" required/>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -97,10 +114,7 @@
                 </form>
 
             </div>
-            <div id="info">
-                <?=sess_message();?>
-
-            </div>
+           
         </div>
 
     </section>

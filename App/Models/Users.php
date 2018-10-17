@@ -52,7 +52,7 @@ class Users extends Model
         if(!is_null($this->request->post('login')))
         {
         $username = $this->request->post('username');
-        $this->user = $this->where('regid=?',$username)->fetch($this->table);
+        $this->user = $this->where('regid=?',$username)->limit(1)->fetch($this->table);
 
         if($this->user)
         {

@@ -10,8 +10,10 @@
                 </div>
             </div>
         </div>    
-        <div class="panel_content" contenteditable="true">
-            Here I am
+        <div class="panel_content">
+            <form class="form" action="/add/teacher" method="post">
+
+            </form>
         </div>
         
     </section>

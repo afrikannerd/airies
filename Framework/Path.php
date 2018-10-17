@@ -56,4 +56,9 @@ class Path {
     {
         return "/public/media/".$file;
     }
+
+    public function inc($file)
+    {
+        return include $this->to($file);
+    }
 }

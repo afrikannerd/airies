@@ -8,7 +8,7 @@
 
 namespace Framework;
 
-
+if(!defined('ROOT'))exit("Get out!");
 class Schema
 {
 
@@ -95,7 +95,7 @@ class Schema
      * @var $limit
      *
      */
-    private $limit;
+    private $limit = 5;
 
     /**The last insert id in a succesful 'INSERT' operation
      *
@@ -176,13 +176,13 @@ class Schema
             {
                 foreach ($this->binding as $key => $val)
                 {
-                    echo $key." ".$val,"<br>";
+                    #echo $key." ".$val,"<br>";
 
                     $this->query->bindValue(++$key,$val);
                 }
 
             }
-            print($this->query->queryString);
+            #print($this->query->queryString);
 
             if($this->query->execute())
             {
@@ -238,7 +238,7 @@ class Schema
     function delete($sql,$args = null)
     {
 
-        $sql = "DELETE FROM {$this->table} WHERE".$sql;
+        $sql = "DELETE FROM {$this->table} WHERE ".$sql;
         $this->bind($args);
 
         $result = $this->query($sql);
@@ -326,6 +326,14 @@ class Schema
         return $this;
     }
 
+    function rowcount($table)
+    {
+        $sql = "SELECT COUNT(*) FROM {$table}";
+        $this->query($sql);
+        $result = $this->query->fetch(\PDO::FETCH_NUM);
+        return array_shift($result);
+    }
+
     /**
      * @param $args
      */
@@ -335,7 +343,7 @@ class Schema
         {
             $this->binding = array_merge($this->binding,$args);
 
-        }elseif($args)
+        }elseif(!is_null($args))
         {
             $this->binding[] = $args;
         }
@@ -374,9 +382,9 @@ class Schema
 
         if($this->where)
         {
-            $sql .= " WHERE ".implode(" ",$this->where);
+            $sql .= " WHERE ".implode(" AND ",$this->where);
         }
-
+        $sql = rtrim($sql,"AND");
         if($this->having)
         {
             $sql .= " HAVING ".implode("  ",$this->having);
@@ -391,7 +399,15 @@ class Schema
         {
             $sql .= " ORDER BY ".implode("  ",$this->orderBy);
         }
-        #dnd($sql);
+
+        $sql .= " LIMIT {$this->limit}";
+
+        if(!is_null($this->offset))
+        {
+            $sql .= " OFFSET {$this->offset}";
+        }
+
+
         return $sql;
     }
 

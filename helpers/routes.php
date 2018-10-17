@@ -55,8 +55,9 @@ $app->route->add("/admin/viewstudent","Admin/Student@view","POST");
 $app->route->add("/admin/removestudent","Admin/Student@remove","POST");
 
 $app->route->add("/admin/:id/edit","Admin/Student@edit");
-$app->route->add("/admin/:id/delete","Admin/Student@remove");
+$app->route->add("/admin/:id/delete","Admin/Student@remove","POST");
 $app->route->add("/admin/:id","Admin/Student@profile");
+$app->route->add("/update/student","Admin/Student@update","POST");
 
 /*=================================================================================================================
  * TEACHER ROUTES
@@ -82,7 +83,7 @@ $app->route->add("/logout/student","Logout","POST");
 $app->route->add("/student","Students/Home");
 $app->route->add("/student/fees","Students/Home@fee");
 $app->route->add("/student/results","Students/Home@result");
-
+$app->route->add("/student/report","Students/Home@report");
 
 
 

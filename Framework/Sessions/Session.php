@@ -7,7 +7,7 @@
  */
 
 namespace Framework\Sessions;
-
+if(!defined('ROOT'))exit("Get out!");
 
 class Session
 {

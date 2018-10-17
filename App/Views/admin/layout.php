@@ -25,8 +25,9 @@
     {
         navigation();
         sidebar();
-    }
 
+    }
+    $this->app->session->add('referer',"http://". $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
     ?>
     <?php include_once $this->path; ?>
 
@@ -38,7 +39,8 @@
     </div>
 </footer>
 
-<script src="<?=assets('js/jquery-3.3.1.min.js');?>"> </script>
+<script src="<?=assets('js/jquery-1.12.3.min.js');?>"> </script>
+<script src="<?=assets('js/bootstrap.min.js');?>" type="text/javascript"></script>
 <script src="<?=assets('js/app.js');?>" type="text/javascript"></script>
 </body>
 </html>

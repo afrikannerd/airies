@@ -19,7 +19,7 @@ class AccessController extends Controller
          /**
          * @var \App\Models\Users $user
          */
-         
+        $data['pages'] = $this->paginate->pagelinks();
         $user = $this->load->model('Users');
         
         $path = explode('/',$this->route->getCurrent());
@@ -40,6 +40,6 @@ class AccessController extends Controller
         }
 
 
-        return $this->view->render('teachers/login');
+        return $this->view->render('teachers/login',$data);
     }
 }

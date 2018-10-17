@@ -7,7 +7,7 @@
  */
 
 namespace Framework;
-
+if(!defined('ROOT'))exit("Get out!");
 
 class Cookie
 {

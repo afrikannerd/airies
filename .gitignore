@@ -1,3 +1,6 @@
 /.idea/
 /nbproject/
 /tester.php
+/vendor/
+composer.json
+report-form.html

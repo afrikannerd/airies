@@ -58,6 +58,7 @@ class Application {
         $this->session->init();
         $this->request->url();
         $this->path->load("helpers/routes");
+        $this->path->load("helpers/config");
         list($controller,$action,$args) = $this->route->getRoute();
         if( $this->route->existsPrior())
         {
@@ -110,6 +111,7 @@ class Application {
             "cookie" => "\\Framework\\Cookie",
             "session" => "\\Framework\\Sessions\\Session",
             "view" => "\\Framework\\View",
+            "paginate" => "\\Framework\\Pagination"
 
         ];
     }

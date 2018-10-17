@@ -17,7 +17,7 @@
             </div>
 
                 <small class="forgot-pw">In case of forgotten password,contact system administrator</small>
-
+                <?php echo $pages;?>
 
         </fieldset>
 
